@@ -7,6 +7,7 @@ class CsvLogGenerator:
 
     def __init__(self,current_time):
         self.current_time = current_time
+
         create_csv_file(current_time)
 
         kafka_consumer = NewKafkaConsumer('schlaegerbande_events', 'localhost:9092').consumer
