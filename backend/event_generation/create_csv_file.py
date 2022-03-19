@@ -1,8 +1,26 @@
 import csv
+import json
 
 def create_csv_file():
+
+    f = open('config.json')
+    config = json.load(f)
 
     # Define CSV file
     with open('backend/files/events.csv', 'w', newline='') as csv_dump:
         writer = csv.writer(csv_dump,delimiter=';')
-        writer.writerow(["case:concept:name","concept:name","time:timestamp"]) # We can add more columns here to add more information
+
+        row_init = []
+        i=0
+        for attribute in config['eventAttributes']:
+            if i==0:
+                row_init.append("case:concept:name")
+            if i==1:
+                row_init.append("concept:name")
+            if i==2:
+                row_init.append("time:timestamp")
+            if i>2:
+                row_init.append(attribute)
+            i+=1
+
+        writer.writerow(row_init)

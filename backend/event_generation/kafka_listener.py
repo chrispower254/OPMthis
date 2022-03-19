@@ -12,7 +12,15 @@ def kafka_listener(consumer):
         print("listener received message")
         # Get actual payload from message and split to work with csv.writer
         event_json = json.loads(msg.value.decode('utf-8'))
-        payload = event_json["case"] + "," + re.search(config['baseUrl'] + '(.*)',event_json["event"]).group(1) + "," + event_json["timestamp"]
+        payload =""
+
+        for attribute in config['eventAttributes']:
+            if payload != "":
+                payload += ","
+            if attribute == "event":
+                payload += re.search(config['baseUrl'] + '(.*)', event_json[attribute]).group(1)
+            if attribute != "event":
+                payload += event_json[attribute]
 
         # Append to CSV file
         with open('backend/files/events.csv', 'a', newline='') as csv_dump:
