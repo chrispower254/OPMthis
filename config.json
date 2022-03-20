@@ -1,5 +1,8 @@
 {
   "baseUrl": "https://schlaegerbande.webflow.io",
-  "eventAttributes": ["case","event","timestamp","device_type","country","continent","city"]
+  "eventAttributes": ["case","event","timestamp","device_type","country","continent","city"],
+  "filters": {
+    "country": ["Denmark","Germany"]
+  }
 }
 
