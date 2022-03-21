@@ -1,20 +1,15 @@
 import './App.css';
-import pic from './files/heunet.png'
-import React, {useState, useEffect} from "react";
+import React from "react";
+import ProcessView from "./View/ProcessView.js";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={pic}/>
-          <button onClick={() => {
-              fetch("/api/update")
-          }}>
-              OPM THIS SHIEEET
-          </button>
-      </header>
-    </div>
-  );
+    return(
+        <>
+            <Filters/>
+            <ProcessView/>
+        </>
+    );
 }
 
 export default App;

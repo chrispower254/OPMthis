@@ -3,6 +3,10 @@
   "eventAttributes": ["case","event","timestamp","device_type","country","continent","city"],
   "filters": {
     "country": ["Denmark","Germany"]
+  },
+  "kafkaSettings": {
+    "topic": "schlaegerbande_events",
+    "bootstrapServers": "localhost:9092"
   }
 }
 
