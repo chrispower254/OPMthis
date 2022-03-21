@@ -1,13 +1,18 @@
 import './App.css';
 import React from "react";
 import ProcessView from "./View/ProcessView.js";
+import Filters from "./View/Filters";
 
 
 function App() {
-    return(
+    return (
         <>
-            <Filters/>
-            <ProcessView/>
+            <div className="wrapper">
+                <div className='main'>
+                    <Filters />
+                    <ProcessView />
+                </div>
+            </div>
         </>
     );
 }
