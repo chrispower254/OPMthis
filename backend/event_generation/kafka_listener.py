@@ -6,6 +6,7 @@ def kafka_listener(consumer):
 
     print("listener is running")
     f = open('config.json')
+    #f = open('configAdidas.json')
     config = json.load(f)
 
     for msg in consumer:
