@@ -1,1 +1,1 @@
-{"baseUrl": "https://schlaegerbande.webflow.io", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"device_type": [""]}, "kafkaSettings": {"topic": "schlaegerbande_events", "bootstrapServers": "localhost:9092"}}
+{"baseUrl": "https://schlaegerbande.webflow.io", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"country": [""], "city": ["Hamburg", "Bremen"]}, "kafkaSettings": {"topic": "schlaegerbande_events", "bootstrapServers": "localhost:9092"}}

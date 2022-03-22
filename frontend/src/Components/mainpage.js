@@ -4,6 +4,9 @@ import pic from '../files/heunet.png';
 import { Filters } from "./filter";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
 
 function MainPage() {
     const [filters, setFilters] = useState([])
@@ -28,11 +31,11 @@ function MainPage() {
 
     console.log(value)
 
-  // alle input werte hiolen => 5 string
-  // alle strings druchen => 
+    // alle input werte hiolen => 5 string
+    // alle strings druchen => 
 
-    return(
-        
+    return (
+
         <div class="grid-container">
             <header class="header">
                 <div class>O P M - D A S H B O A R D</div>
@@ -40,52 +43,52 @@ function MainPage() {
             <main class="main">
                 <div class="main-cards">
                     <div class="card">
-                        <img src={pic}/>
+                        <img src={pic} />
                         <p></p>
-                        <button onClick={() => {
+                        <Button variant="contained" onClick={() => {
                             fetch("/api/update")
-                            }}>REFRESH
-                            </button>
+                        }}>REFRESH
+                        </Button>
                     </div>
                     <div class="card">
                         Filter-Area
                         <>
-                        <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        >
-                        {filters.map(filter => <div>{
-                            <div key={filter}>
-                            <TextField
-                            label={filter}
-                            id="outlined-required"
-                            onChange={evt => handler(filter, evt.currentTarget.value)}
-                            />
-                            </div>
-                        }</div>)}
-                        </Box>
-                            <button onClick={() => {
-        fetch("/api/config/filters/post", {
-          'method': 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(value)
-        })
-      }}>
-        SUBMIT FILTERS
-      </button>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+                                {filters.map(filter => <div>{
+                                    <div key={filter}>
+                                        <TextField
+                                            label={filter}
+                                            id="outlined-required"
+                                            onChange={evt => handler(filter, evt.currentTarget.value)}
+                                        />
+                                    </div>
+                                }</div>)}
+                            </Box>
+                                <Button variant="contained" onClick={() => {
+                                    fetch("/api/config/filters/post", {
+                                        'method': 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(value)
+                                    })
+                                }}>
+                                    SUBMIT FILTERS
+                                </Button>
                         </>
                     </div>
                 </div>
             </main>
             <footer class="footer">
                 <div class="footer__copyright">&copy; Chris Schroeder &amp; Daniel Fischer</div>
-        </footer>
+            </footer>
         </div>
 
 
