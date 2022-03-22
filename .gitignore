@@ -2,3 +2,4 @@
 .idea/vcs.xml
 backend/files
 .idea/vcs.xml
+*.pyc
