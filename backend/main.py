@@ -1,5 +1,4 @@
 from multiprocessing import Process
-#import run
 import api.flask_server as api_start
 from event_generation.generate_csv_log import CsvLogGenerator
 

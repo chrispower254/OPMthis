@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import { valueToPercent } from "@mui/base";
 import { Typography } from "@mui/material";
 
@@ -33,14 +34,21 @@ export const Filters = () => {
 
   return (
     <div>
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
       {filters.map(filter => <div>{
         <div key={filter}>
           <TextField
-            label={filter}
-            onChange={evt => handler(filter, evt.currentTarget.value)}
-            variant="standard"
-            focused
-          />
+          label={filter}
+          id="outlined-required"
+          onChange={evt => handler(filter, evt.currentTarget.value)}
+        />
         </div>
       }</div>)}
       <button onClick={() => {
@@ -54,7 +62,7 @@ export const Filters = () => {
       }}>
         Submit Filters
       </button>
-
+      </Box>
     </div>
   )
 }
