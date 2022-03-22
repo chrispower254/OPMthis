@@ -1,0 +1,1 @@
+{"baseUrl": "", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"device_type": [""]}, "kafkaSettings": {"topic": "adidas", "bootstrapServers": "localhost:9092"}}
