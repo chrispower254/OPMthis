@@ -23,6 +23,7 @@ def getConfig():
     f = open('config.json')
     config = json.load(f)
     fields = config['eventAttributes']
+    print(fields)
     return(
         {
             'response': fields
@@ -38,6 +39,25 @@ def postFilters():
         return "json"
     else:
         return 'Content-Type not supported!'
+
+@app.route('/api/config/filterValues/get',methods=['GET'])
+def getFilters():
+    f = open('config.json')
+    config = json.load(f)
+    filter_query = request.args.get('query')
+    if filter_query in config['filters']:
+        filter_values = config['filters'][filter_query]
+    if filter_query not in config['filters']:
+        filter_values = ''
+    print("test")
+    print(filter_query)
+    print(filter_values)
+    return(
+        {
+            'response': filter_values
+        }
+    )
+
 
 def app_run():
     app.run()
