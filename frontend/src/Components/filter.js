@@ -51,6 +51,7 @@ export const Filters = () => {
         />
         </div>
       }</div>)}
+      </Box>
       <button onClick={() => {
         fetch("/api/config/filters/post", {
           'method': 'POST',
@@ -60,9 +61,8 @@ export const Filters = () => {
           body: JSON.stringify(value)
         })
       }}>
-        Submit Filters
+        SUBMIT FILTERS
       </button>
-      </Box>
     </div>
   )
 }
