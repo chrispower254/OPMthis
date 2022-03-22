@@ -7,7 +7,7 @@ class CsvLogGenerator:
 
     def __init__(self):
         f = open('config.json')
-         #f = open('configAdidas.json')
+        #f = open('configAdidas.json')
         config = json.load(f)
 
         create_csv_file()

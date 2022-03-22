@@ -3,7 +3,7 @@ import json
 import time 
 import requests
 
-filepath = '/Users/daniel/Documents/GitHub.nosync/OPMthis/backend/files/adidas.csv'
+filepath = '/Users/christophschroeder/PycharmProjects/OPMthis/backend/files/adidas.csv'
 url = 'http://localhost:8082/topics/adidas'
 headers = {'content-type': 'application/vnd.kafka.json.v2+json'}
 

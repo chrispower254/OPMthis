@@ -1,3 +1,3 @@
-from event_generation.sendPost import sendPost
+from event_generation.sendAdidasEvents import sendPost
 
 sendPost()

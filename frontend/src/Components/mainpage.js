@@ -18,7 +18,7 @@ function MainPage() {
     };
 
     React.useEffect(() => {
-        // fetch ölogik zum config holen
+        // fetch logik zum config holen
         fetch("/api/config/filters/get").then(res => res.json()).then(data => setFilters(data.response))
     }, [])
 

@@ -21,7 +21,7 @@ def kafka_listener(consumer):
             if attribute == "event":
                 payload += re.search(config['baseUrl'] + '(.*)', event_json[attribute]).group(1)
             if attribute != "event":
-                payload += event_json[attribute]
+                payload += str(event_json[attribute])
 
         # Append to CSV file
         with open('backend/files/events.csv', 'a', newline='') as csv_dump:

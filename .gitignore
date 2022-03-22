@@ -4,3 +4,5 @@ backend/files/events.csv
 .idea/vcs.xml
 *.pyc
 config.json
+*.pyc
+frontend/src/files/heunet.png
