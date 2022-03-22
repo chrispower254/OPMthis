@@ -4,7 +4,7 @@ import { valueToPercent } from "@mui/base";
 import { Typography } from "@mui/material";
 
 
-export const MainView = () => {
+export const Filters = () => {
 
   const [filters, setFilters] = useState([])
   const [value, setValue] = useState({})
@@ -33,7 +33,6 @@ export const MainView = () => {
 
   return (
     <div>
-      Moinsen
       {filters.map(filter => <div>{
         <div key={filter}>
           <TextField
@@ -59,3 +58,4 @@ export const MainView = () => {
     </div>
   )
 }
+

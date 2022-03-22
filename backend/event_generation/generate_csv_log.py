@@ -1,6 +1,6 @@
-from event_generation.create_csv_file import create_csv_file
-from event_generation.kafka_consumer import NewKafkaConsumer
-from event_generation.kafka_listener import kafka_listener
+from backend.event_generation.create_csv_file import create_csv_file
+from backend.event_generation.kafka_consumer import NewKafkaConsumer
+from backend.event_generation.kafka_listener import kafka_listener
 import json
 
 class CsvLogGenerator:

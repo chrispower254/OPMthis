@@ -1,3 +1,4 @@
+/*
 import React from "react";
 // react plugin used to create switch buttons
 import Switch from "react-bootstrap-switch";
@@ -17,7 +18,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { MainView } from "../Components/filter";
+import { Filters } from "../Components/filter";
 
 
 
@@ -25,7 +26,7 @@ function BasicElements() {
 
   return (
     <>
-     <MainView />
+     <Filters />
     </>
   );
 }

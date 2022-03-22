@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './grid.css';
 import pic from '../files/heunet.png';
+import { Filters } from "./filter";
 
 function MainPage() {
     return(
@@ -20,7 +21,12 @@ function MainPage() {
                             </button>
                     </div>
                     <div class="card">KPI-Area</div>
-                    <div class="card">Filter-Area</div>
+                    <div class="card">
+                        Filter-Area
+                        <>
+                            <Filters />
+                        </>
+                    </div>
                 </div>
             </main>
             <footer class="footer">

@@ -22,15 +22,16 @@ def event_log_updater(type):
         event_log_filtered = event_log
         for attribute in config['filters']:
             key_arr = config['filters'][attribute]
-            if key_arr != "":
-                event_log_filtered = pm4py.filter_event_attribute_values(event_log_filtered, attribute, key_arr,level='event')
+            if key_arr[0] != "":
+                event_log_filtered = pm4py.filter_event_attribute_values(event_log_filtered, attribute, key_arr,
+                                                                         level='event')
 
     if type == 'xes':
         event_log = 'lol nuffing'
         event_log_filtered = event_log
         for attribute in config['filters']:
             key_arr = config['filters'][attribute]
-            if key_arr != "":
+            if key_arr[0] != "":
                 event_log_filtered = pm4py.filter_event_attribute_values(event_log_filtered, attribute, key_arr,level='event')
 
     return event_log_filtered
