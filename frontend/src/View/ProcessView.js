@@ -10,7 +10,7 @@ function ProcessView() {
           <button onClick={() => {
               fetch("/api/update")
           }}>
-              OPM THIS SHIEEETasdasds
+              OPM THIS SHIEEET
           </button>
 
         <form>
