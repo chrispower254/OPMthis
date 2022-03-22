@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 {"baseUrl": "https://schlaegerbande.webflow.io", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"country": ["Germany"], "device_type": [""]}, "kafkaSettings": {"topic": "schlaegerbande_events", "bootstrapServers": "localhost:9092"}}
+=======
+{"baseUrl": "https://schlaegerbande.webflow.io", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"case": [""], "event": [""], "timestamp": [""], "device_type": [""], "country": ["Germany"], "continent": [""], "city": [""]}, "kafkaSettings": {"topic": "schlaegerbande_events", "bootstrapServers": "localhost:9092"}}
+>>>>>>> Stashed changes
 =======
 {"baseUrl": "https://schlaegerbande.webflow.io", "eventAttributes": ["case", "event", "timestamp", "device_type", "country", "continent", "city"], "filters": {"case": [""], "event": [""], "timestamp": [""], "device_type": [""], "country": ["Germany"], "continent": [""], "city": [""]}, "kafkaSettings": {"topic": "schlaegerbande_events", "bootstrapServers": "localhost:9092"}}
 >>>>>>> Stashed changes
