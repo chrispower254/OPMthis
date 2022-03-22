@@ -1,7 +1,7 @@
 from flask import Flask, request
 from multiprocessing import Process
-from backend.opm_algo.opm_update import opm_update
-from backend.event_generation.set_filters import set_filters
+from opm_algo.opm_update import opm_update
+from event_generation.set_filters import set_filters
 import json
 
 app = Flask(__name__)
