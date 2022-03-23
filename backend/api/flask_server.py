@@ -18,11 +18,24 @@ def update():
         }
     )
 
+@app.route('/api/config/filters/eventAttribute/get', methods=['GET'])
+def getConfigFiltersEventAttribute():
+    f = open('config.json')
+    config = json.load(f)
+    fields = config['eventAttributes']
+    print(fields)
+    return(
+        {
+            'response': fields
+        }
+    )
+
 @app.route('/api/config/filters/get', methods=['GET'])
 def getConfigFilters():
     f = open('config.json')
     config = json.load(f)
-    fields = config['eventAttributes']
+    fields = config['filters']
+    print(fields)
     return(
         {
             'response': fields

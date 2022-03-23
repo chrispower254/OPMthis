@@ -2,71 +2,116 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { valueToPercent } from "@mui/base";
-import { Typography } from "@mui/material";
 
+
+const style = {
+  width: 250,
+};
 
 export const Filters = () => {
 
-  const [filters, setFilters] = useState([])
-  const [value, setValue] = useState({})
-  const filtersRequest = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: value
-  };
+  const [filters, setFilters] = useState(['placeholder'])
+  const [values, setValues] = useState({})
+  const [isLoading, setLoading] = useState(true);
+  const [defaultValues, setDefaultValues] = useState({})
 
   React.useEffect(() => {
-    // fetch logik zum config holen
-    fetch("/api/config/filters/get").then(res => res.json()).then(data => setFilters(data.response))
+    // fetch logik zum filters holen
+    fetch("/api/config/filters/eventAttribute/get").then(res1 => res1.json()).then(data1 => {
+      setFilters(data1.response)
+      fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {
+        setValues(data2.response)
+        console.log("data2.response")
+        console.log(data2.response)
+        var jsonObj = {}
+        console.log("you here?")
+        console.log(data1.response)
+        for (var key in data1.response) {
+          console.log("watchdis0: " + data1.response[key])
+          console.log(data2.response[data1.response[key]])
+          jsonObj[data1.response[key]] = data2.response[data1.response[key]] ? data2.response[data1.response[key]].join(";") : ""
+          console.log("watchdis1")
+          console.log("watchdis: " + jsonObj[data1.response[key]])
+        }
+        console.log("jsonObj:")
+        console.log(jsonObj)
+        setDefaultValues(jsonObj)
+        setLoading(false)
+      })
+    })
   }, [])
 
   const handler = (filtername, eventValue) => {
-    // console.log("filter",filtername)
-    // console.log("value",value)
-    console.log("eventValue", eventValue)
-    setValue({ ...value, [filtername]: eventValue.split(";") })
+    //console.log("Filters mit join:",values[filtername].join(";"))
+    //setValues({ ...values, [filtername]: eventValue.split(";") })
+    setDefaultValues({ ...values, [filtername]: eventValue })
+    setValues({ ...values, [filtername]: eventValue.split(";") })
   }
 
-  console.log(value)
+  console.log(values)
 
-  // alle input werte hiolen => 5 string
-  // alle strings druchen => 
-
-  return (
-    <div>
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-      >
-        {filters.map(filter => <div>{
-          <div key={filter}>
-            <TextField
-              label={filter}
-              id="outlined-required"
-              onChange={evt => handler(filter, evt.currentTarget.value)}
-            />
-          </div>
-        }</div>)}
-          <Button variant="contained"
-            onClick={() => {
-              fetch("/api/config/filters/post", {
-                'method': 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(value)
+  const render = () => {
+    if (isLoading) return "\n Loading...";
+    else {
+      return (
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+          >
+            {filters.map(filter => <div>{
+              <div key={filter}>
+                <TextField
+                  label={filter}
+                  id="outlined-required"
+                  onChange={evt => handler(filter, evt.currentTarget.value)}
+                  value={defaultValues[filter]}
+                />
+              </div>
+            }</div>)}
+            <Box sx={style}>
+            <Button variant="contained"
+              onClick={() => {
+                fetch("/api/config/filters/post", {
+                  'method': 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(values)
+                })
+              }}>
+              SUBMIT FILTERS
+            </Button>
+            <Button variant="contained" onClick={() => {
+              fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {
+                setValues(data2.response)
+                var jsonObj = {}
+                for (var key in filters) {
+                  console.log("watchdis0: " + filters[key])
+                  console.log(data2.response[filters[key]])
+                  jsonObj[filters[key]] = data2.response[filters[key]] ? data2.response[filters[key]].join(";") : ""
+                  console.log("watchdis1")
+                  console.log("watchdis: " + jsonObj[filters[key]])
+                }
+                console.log("jsonObj:")
+                console.log(jsonObj)
+                setDefaultValues(jsonObj)
+                setLoading(false)
               })
             }}>
-            SUBMIT FILTERS
-          </Button>
-      </Box>
-    </div>
-  )
+              RESET
+            </Button>
+            </Box>
+          </Box>
+        </div>
+      )
+    }
+  }
+  return render()
 }
 
