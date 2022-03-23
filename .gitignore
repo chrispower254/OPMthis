@@ -6,3 +6,4 @@ backend/files/events.csv
 config.json
 *.pyc
 frontend/src/files/heunet.png
+*.png
