@@ -27,7 +27,7 @@ const style = {
 export const Settings = () => {
     const [settings, setSettings] = useState({
         'baseUrl': '',
-        'eventAttributes': '',
+        'eventAttributes': [''],
         'kafkaSettings': {
             'topic': '',
             'bootstrapServers': '',
@@ -54,6 +54,9 @@ export const Settings = () => {
             }})
             console.log("settings kafka?: ")
             console.log(settings)
+        }
+        if (field == "eventAttributes") {
+            setSettings({ ...settings, [field]: eventValue.split(";") })
         }
         else {
             setSettings({ ...settings, [field]: eventValue })
@@ -99,7 +102,7 @@ export const Settings = () => {
                                 id="outlined-required"
                                 onChange={evt => handler('eventAttributes', evt.currentTarget.value)}
                                 fullWidth
-                                value={settings['eventAttributes']}
+                                value={settings['eventAttributes'].join(";")}
                             />
                         </div>
                         <div key="kafkaTopicKey">

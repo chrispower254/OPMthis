@@ -15,6 +15,7 @@ def kafka_listener(consumer):
         event_json = json.loads(msg.value.decode('utf-8'))
         payload =""
 
+        print()
         for attribute in config['eventAttributes']:
             if payload != "":
                 payload += ","
