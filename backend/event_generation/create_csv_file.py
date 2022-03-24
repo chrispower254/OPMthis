@@ -1,11 +1,11 @@
 import csv
 import json
 
-def create_csv_file():
+def create_csv_file(config):
 
-    f = open('config.json')
-    #f = open('configAdidas.json')
-    config = json.load(f)
+    #f = open('config.json')
+    #f = open(config)
+    #config = json.load(f)
 
     # Define CSV file
     with open('backend/files/events.csv', 'w', newline='') as csv_dump:

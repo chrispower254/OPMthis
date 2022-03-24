@@ -2,12 +2,12 @@ import csv
 import json
 import re
 
-def kafka_listener(consumer):
+def kafka_listener(consumer, config):
 
     print("listener is running")
-    f = open('config.json')
-    #f = open('configAdidas.json')
-    config = json.load(f)
+    #f = open('config.json')
+    #f = open(config_string)
+    #config = json.load(f)
 
     for msg in consumer:
         print("listener received message")

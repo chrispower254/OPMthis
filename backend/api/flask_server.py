@@ -1,5 +1,5 @@
 from flask import Flask, request
-from multiprocessing import Process
+from multiprocessing import Process, Queue
 from opm_algo.opm_update import opm_update
 from event_generation.set_config import set_settings, set_filters
 import json
@@ -12,9 +12,10 @@ def update():
     global p
     p = Process(target=opm_update,args=('csv', 'heu_min', 'heu_net'))
     p.start()
+    throughput_time = Queue.get()
     return(
         {
-            'response': 'Update successful'
+            'response': throughput_time
         }
     )
 

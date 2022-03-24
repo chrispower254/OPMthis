@@ -1,7 +1,7 @@
 import json
 
-config_file = 'config.json'
-#config_file = 'configAdidas.json'
+#config_file = 'config.json'
+config_file = 'configAdidas.json'
 
 def set_filters(filter_json):
     with open(config_file) as f:
