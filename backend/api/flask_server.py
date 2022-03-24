@@ -6,11 +6,13 @@ import json
 
 app = Flask(__name__)
 
+args_heu = 'csv', 'heu_min', 'heu_net'
+args_dfg = 'csv', 'dfg', 'dfg'
 
 @app.route('/api/update')
 def update():
     global p
-    p = Process(target=opm_update,args=('csv', 'dfg', 'dfg'))
+    p = Process(target=opm_update,args=(args_dfg))
     p.start()
     throughput_time = Queue.get()
     return(
