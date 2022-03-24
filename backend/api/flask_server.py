@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/api/update')
 def update():
     global p
-    p = Process(target=opm_update,args=('csv', 'heu_min', 'heu_net'))
+    p = Process(target=opm_update,args=('csv', 'dfg', 'dfg'))
     p.start()
     throughput_time = Queue.get()
     return(
