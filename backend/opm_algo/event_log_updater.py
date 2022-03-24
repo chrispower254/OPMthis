@@ -7,8 +7,8 @@ import json
 import pm4py
 
 def event_log_updater(type):
-    #f = open('config.json')
-    f = open('configAdidas.json')
+    f = open('config.json')
+    #f = open('configAdidas.json')
     config = json.load(f)
 
     if type == 'csv':
