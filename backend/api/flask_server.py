@@ -7,16 +7,23 @@ import json
 
 app = Flask(__name__)
 
-args_heu = 'csv', 'heu_min', 'heu_net'
-args_dfg = 'csv', 'dfg', 'dfg'
+#args_heu = 'csv', 'heu_min', 'heu_net'
+#args_dfg = 'csv', 'dfg', 'dfg'
+
+f = open('config.json')
+#f = open('configAdidas.json')
+config = json.load(f)
+
 
 @app.route('/api/update')
 def update():
+    f = open('config.json')
+    #f = open('configAdidas.json')
+    config = json.load(f)
     global p
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
-    p = Process(target=opm_update,args=(args_heu,return_dict))
-    p = Process(target=opm_update, args=('csv', 'heu_min', 'heu_net', return_dict))
+    p = Process(target=opm_update,args=(config["opmSettings"]["eventLogType"],config["opmSettings"]["opmAlgo"],config["opmSettings"]["processNetType"],return_dict))
     p.start()
     p.join()
     print(return_dict.values())
