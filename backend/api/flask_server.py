@@ -4,7 +4,6 @@ from multiprocessing import Process, Queue
 from opm_algo.opm_update import opm_update
 from event_generation.set_config import set_settings, set_filters
 import json
-from ctypes import c_wchar_p
 
 app = Flask(__name__)
 
@@ -14,11 +13,10 @@ args_dfg = 'csv', 'dfg', 'dfg'
 @app.route('/api/update')
 def update():
     global p
-    ret_value = multiprocessing.Value(c_wchar_p, 'aa', lock=False)
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
-    #p = Process(target=opm_update,args=(args_heu))
-    p = Process(target=opm_update, args=('csv', 'heu_min', 'heu_net',return_dict))
+    p = Process(target=opm_update,args=(args_heu,return_dict))
+    p = Process(target=opm_update, args=('csv', 'heu_min', 'heu_net', return_dict))
     p.start()
     p.join()
     print(return_dict.values())

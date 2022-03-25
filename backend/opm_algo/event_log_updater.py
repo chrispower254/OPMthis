@@ -16,6 +16,7 @@ def event_log_updater(type):
         #files = os.listdir(cwd)  # Get all the files in that directory
         #print("Files in %r: %s" % (cwd, files))
         log_csv = pd.read_csv(os.path.join('backend','files', 'events.csv'), sep=';')
+        log_csv["time:timestamp"] = pd.to_datetime(log_csv["time:timestamp"])
         event_log = log_converter.apply(log_csv, parameters={constants.PARAMETER_CONSTANT_CASEID_KEY: "case:concept:name",
                                                              constants.PARAMETER_CONSTANT_ACTIVITY_KEY: "concept:name",
                                                              constants.PARAMETER_CONSTANT_TIMESTAMP_KEY: "time:timestamp"})

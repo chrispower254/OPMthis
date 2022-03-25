@@ -11,7 +11,6 @@ def opm_update(event_log_type, opm_type, process_net_type, return_dict):
     process_net = opm_compute(opm_type, updated_event_log, 0.01)
     opm_visualize(process_net_type,process_net,updated_event_log)
     return_dict[0] = getTroughputTime(updated_event_log)
-    #ret_value.value = 0
 
     now = datetime.now()
     print("opm_update at: " + now.strftime("%H:%M:%S"))

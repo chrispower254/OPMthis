@@ -19,7 +19,7 @@ function MainPage() {
             </header>
             <main class="main">
                     <div class="overviewcard">
-                        <div>Average Throughput-Time: {throughputTime} [hh:mm:ss]</div>
+                        <div>Average Throughput-Time: {throughputTime} sec</div>
                 </div>
                 <div class="main-cards">
                     <div class="card">
