@@ -31,6 +31,11 @@ export const Settings = () => {
         'kafkaSettings': {
             'topic': '',
             'bootstrapServers': '',
+        },
+        'opmSettings': {
+            'eventLogType': '',
+            'opmAlgo': '',
+            'processNetType': ''
         }
     })
     const [open, setOpen] = React.useState(false);
@@ -50,9 +55,11 @@ export const Settings = () => {
         console.log(field + " settings: " + eventValue)
         if (field == "bootstrapServers" || field == "topic") {
             console.log("yea")
-            setSettings({ ...settings, ['kafkaSettings']:{
-                ...settings['kafkaSettings'], [field]: eventValue
-            }})
+            setSettings({
+                ...settings, ['kafkaSettings']: {
+                    ...settings['kafkaSettings'], [field]: eventValue
+                }
+            })
             console.log("settings kafka?: ")
             console.log(settings)
         }
@@ -60,9 +67,11 @@ export const Settings = () => {
             setSettings({ ...settings, [field]: eventValue.split(";") })
         }
         else if (field == "eventLogType" || field == "opmAlgo" || field == "processNetType") {
-            setSettings({ ...settings, ['opmSettings']:{
-                ...settings['opmSettings'], [field]: eventValue
-            }})
+            setSettings({
+                ...settings, ['opmSettings']: {
+                    ...settings['opmSettings'], [field]: eventValue
+                }
+            })
         }
         else {
             setSettings({ ...settings, [field]: eventValue })
@@ -156,20 +165,30 @@ export const Settings = () => {
                                 value={settings['opmSettings']['processNetType']}
                             />
                         </div>
-                        <Button variant="contained" onClick={() => {
-                            console.log(settings)
-                            fetch("/api/config/post", {
-                                'method': 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(settings)
-                            })
-                        }}>
+                        <Button variant="contained" sx={{ mx: 1,marginLeft: 'auto', marginTop: '1rem' }}
+                            onClick={() => {
+                                console.log(settings)
+                                fetch("/api/config/post", {
+                                    'method': 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(settings)
+                                })
+                            }}>
                             SUBMIT SETTINGS
                         </Button>
-                        <Button variant="contained" onClick={() => { fetch("api/config/get").then(res => res.json()).then(data => setSettings(data.response)) }}>
+                        <Button
+                            variant="contained"
+                            sx={{ mx: 1, marginLeft: 'auto', marginTop: '1rem'  }}
+                            onClick={() => { fetch("api/config/get").then(res => res.json()).then(data => setSettings(data.response)) }}>
                             RESET
+                        </Button>
+                        <Button variant="outlined" color="error" sx={{ marginLeft: 'auto', marginTop: '1rem' }}
+                            onClick={() => {
+                                fetch("/api/restart")
+                                console.log("?")
+                            }}>RESTART APP
                         </Button>
                     </Box>
                 </Fade>

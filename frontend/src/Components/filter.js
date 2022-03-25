@@ -63,37 +63,33 @@ export const Filters = () => {
               </div>
             }</div>)}
             <Box sx={style}>
-            <Button variant="contained"
-              onClick={() => {
-                fetch("/api/config/filters/post", {
-                  'method': 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(values)
-                })
-              }}>
-              SUBMIT FILTERS
-            </Button>
-            <Button variant="contained" onClick={() => {
-              fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {
-                setValues(data2.response)
-                var jsonObj = {}
-                for (var key in filters) {
-                  console.log("watchdis0: " + filters[key])
-                  console.log(data2.response[filters[key]])
-                  jsonObj[filters[key]] = data2.response[filters[key]] ? data2.response[filters[key]].join(";") : ""
-                  console.log("watchdis1")
-                  console.log("watchdis: " + jsonObj[filters[key]])
-                }
-                console.log("jsonObj:")
-                console.log(jsonObj)
-                setDefaultValues(jsonObj)
-                setLoading(false)
-              })
-            }}>
-              RESET
-            </Button>
+              <Button variant="contained"
+                onClick={() => {
+                  fetch("/api/config/filters/post", {
+                    'method': 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(values)
+                  })
+                }}>
+                SUBMIT FILTERS
+              </Button>
+              <Button variant="contained"
+                sx={{ mx: 1 }}
+                onClick={() => {
+                  fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {
+                    setValues(data2.response)
+                    var jsonObj = {}
+                    for (var key in filters) {
+                      jsonObj[filters[key]] = data2.response[filters[key]] ? data2.response[filters[key]].join(";") : ""
+                    }
+                    setDefaultValues(jsonObj)
+                    setLoading(false)
+                  })
+                }}>
+                RESET
+              </Button>
             </Box>
           </Box>
         </div>

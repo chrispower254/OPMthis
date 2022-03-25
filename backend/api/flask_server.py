@@ -1,18 +1,32 @@
 from flask import Flask, request
+import json
+import main
 import multiprocessing
 from multiprocessing import Process, Queue
 from opm_algo.opm_update import opm_update
 from event_generation.set_config import set_settings, set_filters
-import json
+import os
+import sys
+
 
 app = Flask(__name__)
 
 #args_heu = 'csv', 'heu_min', 'heu_net'
 #args_dfg = 'csv', 'dfg', 'dfg'
 
-f = open('config.json')
+#f = open('config.json')
 #f = open('configAdidas.json')
-config = json.load(f)
+#config = json.load(f)
+
+@app.route('/api/restart')
+def restart():
+    os.execl(sys.executable, 'python', '/Users/christophschroeder/PycharmProjects/OPMthis/backend/main.py', *sys.argv[1:])
+    #print("restart initiated")
+    return(
+        {
+            'response': 'restart triggered'
+        }
+    )
 
 
 @app.route('/api/update')

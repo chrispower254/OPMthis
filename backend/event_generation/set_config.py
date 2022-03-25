@@ -16,16 +16,19 @@ def set_filters(filter_json):
     print("Set filters finished")
 
 
-def set_settings(filter_json):
+def set_settings(settings_json):
     with open(config_file) as f:
         config = json.load(f)
 
 
-    print(filter_json)
-    config['baseUrl'] = filter_json['baseUrl']
-    config['eventAttributes'] = filter_json['eventAttributes']
-    config['kafkaSettings']['topic'] = filter_json['kafkaSettings']['topic']
-    config['kafkaSettings']['bootstrapServers'] = filter_json['kafkaSettings']['bootstrapServers']
+    print(settings_json)
+    config['baseUrl'] = settings_json['baseUrl']
+    config['eventAttributes'] = settings_json['eventAttributes']
+    config['kafkaSettings']['topic'] = settings_json['kafkaSettings']['topic']
+    config['kafkaSettings']['bootstrapServers'] = settings_json['kafkaSettings']['bootstrapServers']
+    config['opmSettings']['eventLogType'] = settings_json['opmSettings']['eventLogType']
+    config['opmSettings']['opmAlgo'] = settings_json['opmSettings']['opmAlgo']
+    config['opmSettings']['processNetType'] = settings_json['opmSettings']['processNetType']
 
     with open(config_file, 'w') as f:
         json.dump(config, f)

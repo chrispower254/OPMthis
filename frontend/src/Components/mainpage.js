@@ -30,9 +30,9 @@ function MainPage() {
                                 setThroughputTime(data.response)
                                 console.log(data.response)
                             })
-                            console.log("test")
                         }}>REFRESH
                         </Button>
+                        
                     </div>
                     
                     <div class="card">

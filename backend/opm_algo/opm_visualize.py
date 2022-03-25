@@ -8,4 +8,5 @@ def opm_visualize(type,heu_net, event_log):
         hn_visualizer.save(gviz,os.path.join('frontend','src','files', 'heunet.png'))
     if type == 'dfg':
         gviz = dfg_visualization.apply(heu_net, log = event_log, variant=dfg_visualization.Variants.FREQUENCY)
+        print("test")
         dfg_visualization.save(gviz,os.path.join('frontend','src','files', 'heunet.png'))
