@@ -37,7 +37,6 @@ function MainPage() {
                     
                     <div class="card">
                         Filter-Area
-    
                             <Filters />
                     </div>
                 </div>

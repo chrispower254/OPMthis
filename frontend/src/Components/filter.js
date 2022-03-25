@@ -21,20 +21,10 @@ export const Filters = () => {
       setFilters(data1.response)
       fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {
         setValues(data2.response)
-        console.log("data2.response")
-        console.log(data2.response)
         var jsonObj = {}
-        console.log("you here?")
-        console.log(data1.response)
         for (var key in data1.response) {
-          console.log("watchdis0: " + data1.response[key])
-          console.log(data2.response[data1.response[key]])
           jsonObj[data1.response[key]] = data2.response[data1.response[key]] ? data2.response[data1.response[key]].join(";") : ""
-          console.log("watchdis1")
-          console.log("watchdis: " + jsonObj[data1.response[key]])
         }
-        console.log("jsonObj:")
-        console.log(jsonObj)
         setDefaultValues(jsonObj)
         setLoading(false)
       })
@@ -42,8 +32,6 @@ export const Filters = () => {
   }, [])
 
   const handler = (filtername, eventValue) => {
-    //console.log("Filters mit join:",values[filtername].join(";"))
-    //setValues({ ...values, [filtername]: eventValue.split(";") })
     setDefaultValues({ ...values, [filtername]: eventValue })
     setValues({ ...values, [filtername]: eventValue.split(";") })
   }

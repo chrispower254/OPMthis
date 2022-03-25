@@ -59,6 +59,11 @@ export const Settings = () => {
         else if (field == "eventAttributes") {
             setSettings({ ...settings, [field]: eventValue.split(";") })
         }
+        else if (field == "eventLogType" || field == "opmAlgo" || field == "processNetType") {
+            setSettings({ ...settings, ['opmSettings']:{
+                ...settings['opmSettings'], [field]: eventValue
+            }})
+        }
         else {
             setSettings({ ...settings, [field]: eventValue })
             console.log("settings: ")
@@ -122,6 +127,33 @@ export const Settings = () => {
                                 onChange={evt => handler('bootstrapServers', evt.currentTarget.value)}
                                 fullWidth
                                 value={settings['kafkaSettings']['bootstrapServers']}
+                            />
+                        </div>
+                        <div key="opmSettingsEventLogTypeKey">
+                            <TextField
+                                label="Event log type"
+                                id="outlined-required"
+                                onChange={evt => handler('eventLogType', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['eventLogType']}
+                            />
+                        </div>
+                        <div key="opmSettingsOpmAlgoKey">
+                            <TextField
+                                label="OPM algo"
+                                id="outlined-required"
+                                onChange={evt => handler('opmAlgo', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['opmAlgo']}
+                            />
+                        </div>
+                        <div key="opmSettingsProcessNetTypeKey">
+                            <TextField
+                                label="Process net type"
+                                id="outlined-required"
+                                onChange={evt => handler('processNetType', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['processNetType']}
                             />
                         </div>
                         <Button variant="contained" onClick={() => {
