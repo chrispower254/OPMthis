@@ -29,6 +29,7 @@ def set_settings(settings_json):
     config['opmSettings']['eventLogType'] = settings_json['opmSettings']['eventLogType']
     config['opmSettings']['opmAlgo'] = settings_json['opmSettings']['opmAlgo']
     config['opmSettings']['processNetType'] = settings_json['opmSettings']['processNetType']
+    config['opmSettings']['heuMinConfig']['dependency'] = settings_json['opmSettings']['heuMinConfig']['dependency']
 
     with open(config_file, 'w') as f:
         json.dump(config, f)

@@ -37,7 +37,7 @@ def update():
     global p
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
-    p = Process(target=opm_update,args=(config["opmSettings"]["eventLogType"],config["opmSettings"]["opmAlgo"],config["opmSettings"]["processNetType"],return_dict))
+    p = Process(target=opm_update,args=(config,return_dict))
     p.start()
     p.join()
     print(return_dict.values())

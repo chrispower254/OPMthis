@@ -35,7 +35,10 @@ export const Settings = () => {
         'opmSettings': {
             'eventLogType': '',
             'opmAlgo': '',
-            'processNetType': ''
+            'processNetType': '',
+            'heuMinConfig':{
+                'dependency': 0.5
+            }
         }
     })
     const [open, setOpen] = React.useState(false);
@@ -45,7 +48,11 @@ export const Settings = () => {
 
     React.useEffect(() => {
         // fetch logik zum config holen
-        fetch("api/config/get").then(res => res.json()).then(data => setSettings(data.response))
+        fetch("api/config/get").then(res => res.json()).then(data => {
+            setSettings(data.response)
+            console.log(data.response)
+            console.log(settings)
+        })
     }, [])
 
 
@@ -70,6 +77,15 @@ export const Settings = () => {
             setSettings({
                 ...settings, ['opmSettings']: {
                     ...settings['opmSettings'], [field]: eventValue
+                }
+            })
+        }
+        else if (field == "dependency") {
+            setSettings({
+                ...settings, ['opmSettings']: {
+                    ...settings['opmSettings'], ['heuMinConfig']:{
+                        ...settings['opmSettings']['heuMinConfig'], [field]: eventValue
+                    }
                 }
             })
         }
@@ -163,6 +179,15 @@ export const Settings = () => {
                                 onChange={evt => handler('processNetType', evt.currentTarget.value)}
                                 fullWidth
                                 value={settings['opmSettings']['processNetType']}
+                            />
+                        </div>
+                        <div key="opmSettingsHeuMinConfigDependencyKey">
+                            <TextField
+                                label="HeuMin dependency"
+                                id="outlined-required"
+                                onChange={evt => handler('dependency', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['heuMinConfig']['dependency']}
                             />
                         </div>
                         <Button variant="contained" sx={{ mx: 1,marginLeft: 'auto', marginTop: '1rem' }}
