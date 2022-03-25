@@ -30,5 +30,5 @@ def set_settings(filter_json):
     with open(config_file, 'w') as f:
         json.dump(config, f)
 
-    print("Set filters finished")
+    print("Set settings finished")
 

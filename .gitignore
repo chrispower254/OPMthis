@@ -8,3 +8,4 @@ config.json
 frontend/src/files/heunet.png
 *.png
 *.pyc
+*.py

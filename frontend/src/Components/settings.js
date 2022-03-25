@@ -49,13 +49,14 @@ export const Settings = () => {
         // console.log("value",value)
         console.log(field + " settings: " + eventValue)
         if (field == "bootstrapServers" || field == "topic") {
+            console.log("yea")
             setSettings({ ...settings, ['kafkaSettings']:{
                 ...settings['kafkaSettings'], [field]: eventValue
             }})
             console.log("settings kafka?: ")
             console.log(settings)
         }
-        if (field == "eventAttributes") {
+        else if (field == "eventAttributes") {
             setSettings({ ...settings, [field]: eventValue.split(";") })
         }
         else {
