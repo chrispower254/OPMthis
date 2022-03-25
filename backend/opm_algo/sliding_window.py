@@ -9,8 +9,6 @@ from datetime import datetime
 
 def update_event_log(current_time):
     log_csv = pd.read_csv(os.path.join('backend','files', 'events-' + current_time + '.csv'), sep=';')
-    #log_csv = pd.read_csv(os.path.join('files', 'events.csv'), sep=';')
-    # log_csv = log_csv.sort_values("time:timestamp") Maybe doesn't work because empty?
     event_log = log_converter.apply(log_csv, parameters={constants.PARAMETER_CONSTANT_CASEID_KEY: "case:concept:name",
                                                          constants.PARAMETER_CONSTANT_ACTIVITY_KEY: "concept:name",
                                                          constants.PARAMETER_CONSTANT_TIMESTAMP_KEY: "time:timestamp"})

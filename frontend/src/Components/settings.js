@@ -31,6 +31,11 @@ export const Settings = () => {
         'kafkaSettings': {
             'topic': '',
             'bootstrapServers': '',
+        },
+        'opmSettings':{
+            'eventLogType': '',
+            'opmAlgo': '',
+            'processNetType': ''
         }
     })
     const [open, setOpen] = React.useState(false);
@@ -39,30 +44,29 @@ export const Settings = () => {
 
 
     React.useEffect(() => {
-        // fetch logik zum config holen
         fetch("api/config/get").then(res => res.json()).then(data => setSettings(data.response))
     }, [])
 
 
     const handler = (field, eventValue) => {
-        // console.log("filter",filtername)
-        // console.log("value",value)
         console.log(field + " settings: " + eventValue)
         if (field == "bootstrapServers" || field == "topic") {
-            setSettings({ ...settings, ['kafkaSettings']:{
-                ...settings['kafkaSettings'], [field]: eventValue
-            }})
-            console.log("settings kafka?: ")
-            console.log(settings)
+            setSettings({ ...settings['kafkaSettings'], [field]: eventValue
+            })
         }
         if (field == "eventAttributes") {
             setSettings({ ...settings, [field]: eventValue.split(";") })
         }
+        if (field == "eventLogType" || field == "opmAlgo" || field == "processNetType") {
+            setSettings({ ...settings, ['opmSettings']:{
+                ...settings['opmSettings'], [field]: eventValue
+            }})
+        }
         else {
             setSettings({ ...settings, [field]: eventValue })
-            console.log("settings: ")
-            console.log(settings)
         }
+        console.log("Settings internal: ")
+        console.log(settings)
     }
 
 
@@ -102,7 +106,7 @@ export const Settings = () => {
                                 id="outlined-required"
                                 onChange={evt => handler('eventAttributes', evt.currentTarget.value)}
                                 fullWidth
-                                value={settings['eventAttributes'].join(";")}
+                                value={settings['eventAttributes']}
                             />
                         </div>
                         <div key="kafkaTopicKey">
@@ -121,6 +125,33 @@ export const Settings = () => {
                                 onChange={evt => handler('bootstrapServers', evt.currentTarget.value)}
                                 fullWidth
                                 value={settings['kafkaSettings']['bootstrapServers']}
+                            />
+                        </div>
+                        <div key="opmSettingsEventLogTypeKey">
+                            <TextField
+                                label="Event log type"
+                                id="outlined-required"
+                                onChange={evt => handler('eventLogType', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['eventLogType']}
+                            />
+                        </div>
+                        <div key="opmSettingsOpmAlgoKey">
+                            <TextField
+                                label="OPM algo"
+                                id="outlined-required"
+                                onChange={evt => handler('opmAlgo', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['opmAlgo']}
+                            />
+                        </div>
+                        <div key="opmSettingsProcessNetTypeKey">
+                            <TextField
+                                label="Process net type"
+                                id="outlined-required"
+                                onChange={evt => handler('processNetType', evt.currentTarget.value)}
+                                fullWidth
+                                value={settings['opmSettings']['processNetType']}
                             />
                         </div>
                         <Button variant="contained" onClick={() => {
