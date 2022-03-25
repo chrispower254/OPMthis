@@ -4,7 +4,6 @@ import json
 def create_csv_file(config):
 
     #f = open('config.json')
-    #f = open(config)
     #config = json.load(f)
 
     # Define CSV file

@@ -5,13 +5,13 @@ from opm_algo.opm_visualize import opm_visualize
 from opm_algo.get_throughput_time import getTroughputTime
 from multiprocessing import Queue
 
-
-def opm_update(event_log_type, opm_type, process_net_type):
+def opm_update(event_log_type, opm_type, process_net_type, return_dict):
     print("OPM update started")
     updated_event_log = event_log_updater(event_log_type)
     process_net = opm_compute(opm_type, updated_event_log, 0.01)
-    opm_visualize(process_net_type,process_net)
-    Queue().put(getTroughputTime(updated_event_log))
+    opm_visualize(process_net_type,process_net,updated_event_log)
+    return_dict[0] = getTroughputTime(updated_event_log)
+    #ret_value.value = 0
 
     now = datetime.now()
     print("opm_update at: " + now.strftime("%H:%M:%S"))

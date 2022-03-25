@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 
 function MainPage() {
-    const throughput_time = 0
+    const [throughputTime,setThroughputTime] = useState("")
     return (
 
         <div class="grid-container">
@@ -19,15 +19,18 @@ function MainPage() {
             </header>
             <main class="main">
                     <div class="overviewcard">
-                        <div>Average Throughput-Time: {throughput_time}s</div>
+                        <div>Average Throughput-Time: {throughputTime} [hh:mm:ss]</div>
                 </div>
                 <div class="main-cards">
                     <div class="card">
                         <img src={pic} />
                         <p></p>
                         <Button variant="contained" onClick={() => {
-                            fetch("/api/update").then(res1 => res1.json()).then(data1 => {
-                                throughput_time = data1.response})
+                            fetch("/api/update").then(res => res.json()).then(data => {
+                                setThroughputTime(data.response)
+                                console.log(data.response)
+                            })
+                            console.log("test")
                         }}>REFRESH
                         </Button>
                     </div>

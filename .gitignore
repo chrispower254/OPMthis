@@ -1,6 +1,6 @@
 
 .idea/vcs.xml
-backend/files/events.csv
+backend/files
 .idea/vcs.xml
 *.pyc
 config.json
