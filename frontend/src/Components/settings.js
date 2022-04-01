@@ -8,6 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
 
 
@@ -23,6 +24,32 @@ const style = {
     p: 4,
 };
 
+const opmStyles = [
+    {
+        value: 'dfg;dfg',
+        label: 'dfg;dfg',
+    },
+    {
+        value: 'heu_min;heu_net',
+        label: 'heu_min;heu_net',
+    },
+    {
+        value: 'inductive;process_tree',
+        label: 'inductive;process_tree',
+    }
+];
+
+const eventLogTypes = [
+    {
+        value: 'csv',
+        label: 'csv',
+    },
+    {
+        value: 'xes-test',
+        label: 'xes-test',
+    }
+];
+
 
 export const Settings = () => {
     const [settings, setSettings] = useState({
@@ -36,7 +63,7 @@ export const Settings = () => {
             'eventLogType': '',
             'opmAlgo': '',
             'processNetType': '',
-            'heuMinConfig':{
+            'heuMinConfig': {
                 'dependency': 0.5
             }
         }
@@ -44,6 +71,8 @@ export const Settings = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
 
 
     React.useEffect(() => {
@@ -61,29 +90,19 @@ export const Settings = () => {
         // console.log("value",value)
         console.log(field + " settings: " + eventValue)
         if (field == "bootstrapServers" || field == "topic") {
-            console.log("yea")
             setSettings({
                 ...settings, ['kafkaSettings']: {
                     ...settings['kafkaSettings'], [field]: eventValue
                 }
             })
-            console.log("settings kafka?: ")
-            console.log(settings)
         }
         else if (field == "eventAttributes") {
             setSettings({ ...settings, [field]: eventValue.split(";") })
         }
-        else if (field == "eventLogType" || field == "opmAlgo" || field == "processNetType") {
-            setSettings({
-                ...settings, ['opmSettings']: {
-                    ...settings['opmSettings'], [field]: eventValue
-                }
-            })
-        }
         else if (field == "dependency") {
             setSettings({
                 ...settings, ['opmSettings']: {
-                    ...settings['opmSettings'], ['heuMinConfig']:{
+                    ...settings['opmSettings'], ['heuMinConfig']: {
                         ...settings['opmSettings']['heuMinConfig'], [field]: eventValue
                     }
                 }
@@ -96,6 +115,22 @@ export const Settings = () => {
         }
     }
 
+    const handleOpmStyle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        var input = event.target.value.split(";")
+        setSettings({
+            ...settings, ['opmSettings']: {
+                ...settings['opmSettings'], ['opmAlgo']: input[0], ['processNetType']: input[1]
+            }
+        })
+    };
+
+    const handleEventLogType = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSettings({
+            ...settings, ['opmSettings']: {
+                ...settings['opmSettings'], ['eventLogType']: event.target.value
+            }
+        })
+    };
 
     return (
         <div>
@@ -156,30 +191,35 @@ export const Settings = () => {
                         </div>
                         <div key="opmSettingsEventLogTypeKey">
                             <TextField
+                                id="outlined-select-currency"
+                                select
+                                fullWidth
                                 label="Event log type"
-                                id="outlined-required"
-                                onChange={evt => handler('eventLogType', evt.currentTarget.value)}
-                                fullWidth
                                 value={settings['opmSettings']['eventLogType']}
-                            />
+                                onChange={handleEventLogType}
+                            >
+                                {eventLogTypes.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </div>
-                        <div key="opmSettingsOpmAlgoKey">
+                        <div key="opmSettingsOpmStyleKey">
                             <TextField
-                                label="OPM algo"
-                                id="outlined-required"
-                                onChange={evt => handler('opmAlgo', evt.currentTarget.value)}
+                                id="outlined-select-currency"
+                                select
                                 fullWidth
-                                value={settings['opmSettings']['opmAlgo']}
-                            />
-                        </div>
-                        <div key="opmSettingsProcessNetTypeKey">
-                            <TextField
-                                label="Process net type"
-                                id="outlined-required"
-                                onChange={evt => handler('processNetType', evt.currentTarget.value)}
-                                fullWidth
-                                value={settings['opmSettings']['processNetType']}
-                            />
+                                label="OPM algo ; Net type"
+                                value={settings['opmSettings']['opmAlgo'] + ";" + settings['opmSettings']['processNetType']}
+                                onChange={handleOpmStyle}
+                            >
+                                {opmStyles.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </div>
                         <div key="opmSettingsHeuMinConfigDependencyKey">
                             <TextField
@@ -190,7 +230,7 @@ export const Settings = () => {
                                 value={settings['opmSettings']['heuMinConfig']['dependency']}
                             />
                         </div>
-                        <Button variant="contained" sx={{ mx: 1,marginLeft: 'auto', marginTop: '1rem' }}
+                        <Button variant="contained" sx={{ mx: 1, marginLeft: 'auto', marginTop: '1rem' }}
                             onClick={() => {
                                 console.log(settings)
                                 fetch("/api/config/post", {
@@ -205,7 +245,7 @@ export const Settings = () => {
                         </Button>
                         <Button
                             variant="contained"
-                            sx={{ mx: 1, marginLeft: 'auto', marginTop: '1rem'  }}
+                            sx={{ mx: 1, marginLeft: 'auto', marginTop: '1rem' }}
                             onClick={() => { fetch("api/config/get").then(res => res.json()).then(data => setSettings(data.response)) }}>
                             RESET
                         </Button>
