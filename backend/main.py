@@ -8,13 +8,12 @@ if __name__ == '__main__':
     print("Start of main")
     # Either use 'kafka' or 'adidas'
     # 'adidas' uses a fake event log for stream generation
-    source = "adidas"
+    source = "kafka"
 
     # Multiprocessing needed in order to listen to events and run the API simultaneously
     if source == "kafka":
         f = open('config.json')
         config = json.load(f)
-        print("trestests")
         p1 = Process(target=CsvLogGenerator,args=(config,source))
         p2 = Process(target=api_start.app_run,args=([source]))
         p1.start()

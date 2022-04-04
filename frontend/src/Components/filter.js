@@ -14,7 +14,7 @@ export const Filters = () => {
   const [values, setValues] = useState({})
   const [isLoading, setLoading] = useState(true);
   const [defaultValues, setDefaultValues] = useState({})
-  const [throughputTime,setThroughputTime] = useState("")
+  const [throughputTime, setThroughputTime] = useState("")
 
   // Calls API to retrieve all fields that we can filter on
   React.useEffect(() => {
