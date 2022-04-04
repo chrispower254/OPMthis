@@ -14,9 +14,10 @@ export const Filters = () => {
   const [values, setValues] = useState({})
   const [isLoading, setLoading] = useState(true);
   const [defaultValues, setDefaultValues] = useState({})
+  const [throughputTime,setThroughputTime] = useState("")
 
+  // Calls API to retrieve all fields that we can filter on
   React.useEffect(() => {
-    // fetch logik zum filters holen
     fetch("/api/config/filters/eventAttribute/get").then(res1 => res1.json()).then(data1 => {
       setFilters(data1.response)
       fetch("/api/config/filters/get").then(res2 => res2.json()).then(data2 => {

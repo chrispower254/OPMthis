@@ -5,15 +5,12 @@ import json
 
 class CsvLogGenerator:
 
-    def __init__(self):
-        f = open('config.json')
-        #f = open('configAdidas.json')
-        config = json.load(f)
+    def __init__(self,config,source):
 
         create_csv_file(config)
 
         kafka_consumer = NewKafkaConsumer(config['kafkaSettings']['topic'], config['kafkaSettings']['bootstrapServers']).consumer
-        print("test csvloggeneratorr: " + config['kafkaSettings']['topic'] + " and " + config['kafkaSettings']['bootstrapServers'])
+        print("Kafka Consumer listening for topic \'" + config['kafkaSettings']['topic'] + "\' on host " + config['kafkaSettings']['bootstrapServers'])
         kafka_listener(kafka_consumer,config)
 
 

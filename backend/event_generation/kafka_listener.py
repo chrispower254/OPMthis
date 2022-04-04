@@ -4,19 +4,19 @@ import re
 
 def kafka_listener(consumer, config):
 
-    print("listener is running")
-
     for msg in consumer:
-        print("listener received message")
+        print("Kafka consumer received message")
+        
         # Get actual payload from message and split to work with csv.writer
         event_json = json.loads(msg.value.decode('utf-8'))
         payload =""
 
-        print()
+        # Build string from message to store in event log
         for attribute in config['eventAttributes']:
             if payload != "":
                 payload += ","
             if attribute == "event":
+                # Only take URL ending and cut out the base URL
                 payload += re.search(config['baseUrl'] + '(.*)', event_json[attribute]).group(1)
             if attribute != "event":
                 payload += str(event_json[attribute])
@@ -26,5 +26,3 @@ def kafka_listener(consumer, config):
             writer = csv.writer(csv_dump, delimiter=';')
             writer.writerow(payload.split(","))
             print(payload)
-
-    print("Consumer closed")

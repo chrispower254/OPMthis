@@ -1,3 +1,4 @@
 from event_generation.sendAdidasEvents import sendPost
 
-sendPost()
+def __init__():
+    sendPost()

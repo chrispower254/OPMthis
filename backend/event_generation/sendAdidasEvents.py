@@ -2,8 +2,10 @@ import pandas as pd
 import json
 import time 
 import requests
+import os
 
-filepath = '/Users/daniel/Documents/GitHub.nosync/OPMthis/backend/files/adidas.csv'
+#filepath = '/Users/daniel/Documents/GitHub.nosync/OPMthis/backend/files/adidas.csv'
+filepath = os.path.join(os.getcwd(), 'backend','files','adidas.csv')
 url = 'http://localhost:8082/topics/adidas'
 headers = {'content-type': 'application/vnd.kafka.json.v2+json'}
 

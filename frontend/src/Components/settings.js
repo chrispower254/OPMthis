@@ -24,6 +24,8 @@ const style = {
     p: 4,
 };
 
+// Defines list for OPM algorithm and process net type
+// OPM algorithms require special process nets
 const opmStyles = [
     {
         value: 'dfg;dfg',
@@ -39,14 +41,15 @@ const opmStyles = [
     }
 ];
 
+// Type of the log, that will be generated
 const eventLogTypes = [
     {
         value: 'csv',
         label: 'csv',
     },
     {
-        value: 'xes-test',
-        label: 'xes-test',
+        value: 'test',
+        label: 'test',
     }
 ];
 
@@ -71,23 +74,19 @@ export const Settings = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [throughputTime,setThroughputTime] = useState("")
 
 
-
-
+    // Calls API to retrieve configurations
     React.useEffect(() => {
-        // fetch logik zum config holen
         fetch("api/config/get").then(res => res.json()).then(data => {
             setSettings(data.response)
-            console.log(data.response)
-            console.log(settings)
         })
     }, [])
 
 
+    // Passes the input of the forms into the settings constant
     const handler = (field, eventValue) => {
-        // console.log("filter",filtername)
-        // console.log("value",value)
         console.log(field + " settings: " + eventValue)
         if (field == "bootstrapServers" || field == "topic") {
             setSettings({
@@ -110,11 +109,10 @@ export const Settings = () => {
         }
         else {
             setSettings({ ...settings, [field]: eventValue })
-            console.log("settings: ")
-            console.log(settings)
         }
     }
 
+    // Passes the input of the OPM style form into the settings
     const handleOpmStyle = (event: React.ChangeEvent<HTMLInputElement>) => {
         var input = event.target.value.split(";")
         setSettings({
@@ -124,6 +122,7 @@ export const Settings = () => {
         })
     };
 
+    // Passes the input of the event log type form into the settings
     const handleEventLogType = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSettings({
             ...settings, ['opmSettings']: {

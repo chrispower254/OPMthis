@@ -1,9 +1,12 @@
 import json
 
-config_file = 'config.json'
-#config_file = 'configAdidas.json'
 
-def set_filters(filter_json):
+def set_filters(filter_json,config,source):
+    if source == 'kafka':
+        config_file = 'config.json'
+    elif source == 'adidas':
+        config_file = 'configAdidas.json'
+        
     with open(config_file) as f:
         config = json.load(f)
 
@@ -16,10 +19,15 @@ def set_filters(filter_json):
     print("Set filters finished")
 
 
-def set_settings(settings_json):
+def set_settings(settings_json,config,source):
+
+    if source == 'kafka':
+        config_file = 'config.json'
+    elif source == 'adidas':
+        config_file = 'configAdidas.json'
+
     with open(config_file) as f:
         config = json.load(f)
-
 
     print(settings_json)
     config['baseUrl'] = settings_json['baseUrl']

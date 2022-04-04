@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './grid.css';
+import '../assets/grid.css';
 import pic from '../files/heunet.png';
 import { Filters } from "./filter";
 import { Settings } from "./settings";

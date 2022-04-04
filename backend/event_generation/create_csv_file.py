@@ -3,15 +3,15 @@ import json
 
 def create_csv_file(config):
 
-    #f = open('config.json')
-    #config = json.load(f)
-
     # Define CSV file
     with open('backend/files/events.csv', 'w', newline='') as csv_dump:
         writer = csv.writer(csv_dump,delimiter=';')
 
         row_init = []
         i=0
+
+        # Assumption that first three columns are case id, activity name and timestamp
+        # For following columns the names from config file are taken
         for attribute in config['eventAttributes']:
             if i==0:
                 row_init.append("case:concept:name")
