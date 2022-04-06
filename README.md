@@ -10,8 +10,14 @@ _OPMThis_ can be used to mine even streams. It is meant to serve as a basic appl
 - Other use-cases in general
 
 To make OPMThis work, this pipeline needs to be in place:
-![Application diagrams-Pipeline drawio](https://user-images.githubusercontent.com/46896615/161815361-26f78cc8-e59d-4792-ab09-42a9a9c0f4cb.png)
-... Explain the different elements
+
+![Application diagrams-Pipeline drawio](https://user-images.githubusercontent.com/46896615/162034156-b9a3559e-bb90-4c29-9504-22e8320ffbd6.png)
+
+The different pipeline modules are supposed to be as independent from each other as possible. This first base version runs with the following setup:
+![Application diagrams-OPMThis Pipeline drawio](https://user-images.githubusercontent.com/46896615/162033661-effa5432-e9ca-4960-a873-4cdfbf17cf02.png)
+
+
+
 
 
 This application is structured as the following:
