@@ -52,7 +52,7 @@ _OPMthis_ is designed to run with event streams coming from Apache Kafka. Obviou
     - You have to fetch events from your source and pass them into a system for event stream generation
         - For this you can use Google Tag Manager
         - GTM has to be set up to send events to a Kafka host on specific triggers, e.g. on page initializiation
-            - LINK TO SEPARATE TUTORIAL
+            - **LINK TO SEPARATE TUTORIAL???**
 3) Event stream with Apache Kafka
     - In order to process the events from your source, you need to have a system to generate an event stream, e.g. Apache Kafka
     - Install zookeeper, kafka and kafka-rest
