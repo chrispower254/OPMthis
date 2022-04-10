@@ -27,10 +27,8 @@ def restart():
 # API to load new process net
 def update():
     if source == 'kafka':
-        print("awasdasdasdadwa kafkafkafkafkaf")
         config_file = 'config.json'
     elif source == 'adidas':
-        print("awasdasdasdadwa")
         config_file = 'configAdidas.json'
     f = open(config_file)
     config = json.load(f)

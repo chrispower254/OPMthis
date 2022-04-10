@@ -2,7 +2,7 @@ from datetime import datetime
 from opm_algo.event_log_updater import event_log_updater
 from opm_algo.opm_compute import opm_compute
 from opm_algo.opm_visualize import opm_visualize
-from opm_algo.get_throughput_time import getTroughputTime
+from opm_algo.get_throughput_time import get_throughput_time
 
 def opm_update(config, return_dict):
 
@@ -21,7 +21,7 @@ def opm_update(config, return_dict):
     # Generate new png file from process net
     opm_visualize(process_net_type,process_net,updated_event_log)
     # Compute throughput time
-    return_dict[0] = getTroughputTime(updated_event_log)
+    return_dict[0] = get_throughput_time(updated_event_log)
 
     now = datetime.now()
     print("opm_update at: " + now.strftime("%H:%M:%S"))

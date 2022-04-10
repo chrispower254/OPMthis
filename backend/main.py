@@ -34,5 +34,3 @@ if __name__ == '__main__':
         p3.join()
     
     print("End of main")
-
-    
